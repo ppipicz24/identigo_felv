@@ -26,6 +26,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
+        $this -> authorize('create', Company::class);
         $companies = Company::all();
         return view('companies.create', ['companies' => $companies]);
     }
@@ -35,6 +36,7 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
+        $this -> authorize('create', Company::class);
         $validated = $request -> validate([
             'name' => 'required|string|distinct',
             'tax' => 'required|string|distinct',
@@ -83,6 +85,7 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
+        $this -> authorize('update', $company);
         //$companies = Company::all();
         return view('companies.edit', ['company' => $company]);
     }
@@ -92,6 +95,7 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
+        $this -> authorize('update', $company);
         $validated = $request -> validate([
             'name' => 'required|string|distinct',
             'tax' => 'required|string|distinct',
@@ -130,6 +134,7 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
+        $this -> authorize('delete', $company);
         $company->delete();
         Session::flash('company-deleted'); 
         return to_route('companies.index');
