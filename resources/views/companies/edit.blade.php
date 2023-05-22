@@ -5,32 +5,32 @@
     @csrf
     @method('PATCH')
     
-    Név: <input type="text" name="name" value="{{old('name')}}"><br>
+    Név: <input type="text" name="name" value="{{old('name')}}" class="form-control"><br>
     @error('name')
     {{ $message }}
     @enderror
     <br>
 
-    Adószám: <input type="text" name="tax" value="{{old('tax')}}"><br>
+    Adószám: <input type="text" name="tax" value="{{old('tax')}}" class="form-control"><br>
     @error('tax')
     {{ $message }}
     @enderror
     <br>
 
-    Email: <input type="email" name="email" value="{{old('email')}}"><br>
+    Email: <input type="email" name="email" value="{{old('email')}}" class="form-control"><br>
     @error('email')
     {{ $message }}
     @enderror
     <br>
 
-    Telefonszám: <input type="tel" name="phone" value="{{old('phone')}}"><br>
+    Telefonszám: <input type="tel" name="phone" value="{{old('phone')}}" class="form-control"><br>
     @error('phone')
     {{ $message }}
     @enderror
 
 
     
-    <button type="submit" class="p-2 inline-block bg-sky-900 hover:bg-sky-700 text-white">Mentés</button>
+    <button type="submit" class="btn btn-primary btn-block mb-4 btn-lg">Mentés</button>
 
     </form>
 </x-guest-layout>

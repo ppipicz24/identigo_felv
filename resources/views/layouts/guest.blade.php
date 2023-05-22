@@ -6,6 +6,13 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -18,32 +25,37 @@
         <div class="container mx-auto">
             <div class="grid grid-cols-4 gap-6">
                 <div class="col-span-4">
-                    <h1>Cég adatok</h1>
-                    <nav>
+                    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
                         @auth
-                            <nav class="bg-white px-8 pt-2 shadow-md">
-                            <div class="-mb-px flex justify-center">
-                            <a class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8" href="{{ route('companies.index')}}">Cégek</a>
-                            <form action="{{ route('logout') }}" method="POST">
+                        <nav class="px-8 pt-2 shadow-md">
+                            <div class="collapse navbar-collapse" id="navbarResponsive">
+                                <ul class="navbar-nav">
+
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('companies.index')}}">Cégek</a></li>
+                            <li class="nav-item"><form action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8">Kijelentkezés</button>
-                            </form>
-                            </div>
+                                        <button type="submit" class="btn btn-outline-light">Kijelentkezés</button></li>
+                                    </form>
+                                </ul>
+                                </div>
                             </nav>
-                        @endauth
-                        @guest
-                        <nav class="bg-white px-8 pt-2 shadow-md">
-                            <div class="-mb-px flex justify-center">
-                                <a class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8" href="{{ route('companies.index')}}">Cégek</a>
-                                <a class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8" href="{{ route('login') }}">Bejelentkezés</a>
-                                <a class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8" href="{{ route('register') }}">Regisztráció</a>
+                            @endauth
+                            @guest
+                            <nav class="px-8 pt-2 shadow-md">
+                            <div class="collapse navbar-collapse" id="navbarResponsive">
+                            <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('companies.index')}}">Cégek</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{{ route('login') }}">Bejelentkezés</a></li>
+                                <li class="nav-item"><a class="nav-link js-scroll-trigger"href="{{ route('register') }}">Regisztráció</a></li>
+                            </ul>
                             </div>
                         </nav>
                         @endguest
-                </div>
-                    </nav>
-                <div class="col-span-4">
-                    {{ $slot }}
+                    </div>
+                </nav>
+                
+                    <div class="col-span-4">
+                        {{ $slot }}
                 </div>
                                 
                 </div>

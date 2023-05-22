@@ -13,14 +13,11 @@ use Illuminate\Support\Facades\Session;
     @if (Session::get('company-deleted'))
     <p class="p-2">A cég sikeresen törölve!</p>
     @endif
+
+
     
-
-@auth
-<button><a href="{{ route('companies.create') }}">Új cég felvétele</a></button>
-@endauth
-
-
-
+    
+<h1>Cég adatok</h1>
 <!-- @php
 foreach($users as $user)
 {
@@ -28,7 +25,7 @@ foreach($users as $user)
     echo $user->name;
 }
 @endphp -->
-<table>
+<table  class="table table-striped">
     <thead>
         <tr>
             <th>Név</th>
@@ -39,7 +36,7 @@ foreach($users as $user)
 
     <tbody>
         @foreach ($companies as $company)
-            <tr>
+        <tr>
                 <td>{{ $company->name }}</td>
                 <td>{{ $company->tax }}</td>
                 <td><a href="{{ route('companies.show', $company->id) }}">Részletek</td>
@@ -48,4 +45,10 @@ foreach($users as $user)
     </tbody>
 </table>
 
+
+@auth
+<button class="btn btn-outline-warning btn-lg"><a href="{{ route('companies.create') }}">Új cég felvétele</a></button>
+@else
+<button class="btn btn-outline-warning btn-lg"><a href="{{ route('login') }}">Új cég felvétele</a></button>
+@endauth
 </x-guest-layout>
