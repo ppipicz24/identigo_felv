@@ -37,11 +37,10 @@ mkdir .\storage\app\public
 :: Symlink készítése, alap config szerint a /public/storage-ról a /storage/app/public-ra
 call php artisan storage:link
 
+::User login adatok kiírása
+echo Bejelentkezesi adatok:
+echo Felhasznalonev: admin@admin.hu
+echo jelszo: password
+
 :: Alkalmazás indítása
 call php artisan serve
-
-::User login adatok kiírása
-echo Bejelentkezési adatok:
-echo Felhasználónév: admin@admin.hu
-echo Jelszó: password
-```
