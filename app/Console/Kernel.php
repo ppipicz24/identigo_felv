@@ -8,6 +8,15 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 class Kernel extends ConsoleKernel
 {
     /**
+ * Execute the console command.
+ *
+ * @return mixed
+ */
+// public function handle()
+// {
+//     $this->info('Display this on the screen');
+// }
+    /**
      * Define the application's command schedule.
      */
     protected function schedule(Schedule $schedule): void

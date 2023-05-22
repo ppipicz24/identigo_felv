@@ -14,16 +14,39 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
-
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
+    <body>
+        <div class="container mx-auto">
+            <div class="grid grid-cols-4 gap-6">
+                <div class="col-span-4">
+                    <h1>Cég adatok</h1>
+                    <nav>
+                        @auth
+                            <nav class="bg-white px-8 pt-2 shadow-md">
+                            <div class="-mb-px flex justify-center">
+                            <a class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8" href="{{ route('companies.index')}}">Cégek</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8">Kijelentkezés</button>
+                            </form>
+                            </div>
+                            </nav>
+                        @endauth
+                        @guest
+                        <nav class="bg-white px-8 pt-2 shadow-md">
+                            <div class="-mb-px flex justify-center">
+                                <a class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8" href="{{ route('companies.index')}}">Cégek</a>
+                                <a class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8" href="{{ route('login') }}">Bejelentkezés</a>
+                                <a class="hover:underline text-grey-dark border-b-2 border-transparent uppercase tracking-wide font-bold text-base py-3 mr-8" href="{{ route('register') }}">Regisztráció</a>
+                            </div>
+                        </nav>
+                        @endguest
+                </div>
+                    </nav>
+                <div class="col-span-4">
+                    {{ $slot }}
+                </div>
+                                
+                </div>
             </div>
         </div>
     </body>
