@@ -74,7 +74,8 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        $users = User::all();
+        return view('companies.show', ['company' => $company, 'users' => $users]);
     }
 
     /**
@@ -82,7 +83,8 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        //$companies = Company::all();
+        return view('companies.edit', ['company' => $company]);
     }
 
     /**
@@ -90,7 +92,37 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $validated = $request -> validate([
+            'name' => 'required|string|distinct',
+            'tax' => 'required|string|distinct',
+            'email' => 'required|email|distinct',
+            'phone' => 'required|numeric|distinct|digits:11',
+        ],
+        [
+            'name.required' => 'A név megadása kötelező!',
+            'name.distinct' => 'A névnek egyedinek kell lennie!',
+            'name.string' => 'A névnek szövegnek kell lennie!',
+            'tax.required' => 'Az adószám megadása kötelező!',
+            'tax.distinct' => 'Az adószámnak egyedinek kell lennie!',
+            'tax.string' => 'Az adószámnak szövegnek kell lennie!',
+            'email.required' => 'Az email cím megadása kötelező!',
+            'email.distinct' => 'Az email címnek egyedinek kell lennie!',
+            'email.email' => 'Az email címnek email címnek kell lennie!',
+            'phone.required' => 'A telefonszám megadása kötelező!',
+            'phone.distinct' => 'A telefonszámnak egyedinek kell lennie!',
+            'phone.integer' => 'A telefonszámnak számnak kell lennie!',
+
+        ]
+    );
+
+    $validated['user_id'] = Auth::id();
+
+    $company->update($validated);
+    // $companies->users()->sync($request->id);
+
+    // $companies->users()->associate(User::all()->random()->id)->save();
+    Session::flash('company-updated'); 
+    return to_route('companies.index');
     }
 
     /**
@@ -98,6 +130,8 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        Session::flash('company-deleted'); 
+        return to_route('companies.index');
     }
 }

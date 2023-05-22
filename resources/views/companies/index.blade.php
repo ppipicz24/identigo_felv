@@ -7,6 +7,13 @@ use Illuminate\Support\Facades\Session;
     @if (Session::get('company-created'))
     <p class="p-2">A cég sikeresen létrehozva!</p>
     @endif
+    @if (Session::get('company-updated'))
+    <p class="p-2">A cég adatai sikeresen frissültek!</p>
+    @endif
+    @if (Session::get('company-deleted'))
+    <p class="p-2">A cég sikeresen törölve!</p>
+    @endif
+    
 
 @auth
 <button><a href="{{ route('companies.create') }}">Új cég felvétele</a></button>
